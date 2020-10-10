@@ -14,6 +14,7 @@
 }
 
 .caption {
+  //reference to variables in utils.scss
   composes: visuallyHidden from "./utils.scss";
 }
 
