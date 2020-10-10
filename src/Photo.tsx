@@ -1,13 +1,11 @@
 import * as React from "react";
 import { getSrc, getSrcSet } from "./utils";
-// import { customMedia } from "./global.css";
 import styles from "./Photo.scss";
-// import "./Photo1.scss";
-// const styles = require("./Photo.scss");
-// const photo1Styles = require("Photo1.module.scss");
-// const { customMedia } = require("./global.css");
+const { customMedia } = require("./global.scss"); //load the variable in global.scss into customMedia
 
 console.log(styles);
+console.log(customMedia);
+
 export interface PhotoProps {
   publicId: any;
   alt: any;
@@ -23,8 +21,8 @@ const Photo = ({ publicId, alt, rounded, borderRadius }: PhotoProps) => (
         style={
           typeof borderRadius !== "undefined"
             ? ({
-                // ["--border-radius"]: borderRadius,
-                borderRadius: borderRadius
+                ["--border-radius"]: borderRadius
+                // borderRadius: borderRadius
               } as React.CSSProperties)
             : ((null as unknown) as React.CSSProperties)
         }
@@ -36,12 +34,12 @@ const Photo = ({ publicId, alt, rounded, borderRadius }: PhotoProps) => (
           publicId,
           widths: [200, 400, 800]
         })}
-        // sizes={`${customMedia["--photo-breakpoint"]} 400px, 200px`}
-        sizes="(min-width: 30rem) 400px, 200px"
+        sizes={`${customMedia["--photo-breakpoint"]} 400px, 200px`}
+        // sizes="(min-width: 30rem) 400px, 200px"
       />{" "}
       <figcaption className={styles.caption}> {alt} </figcaption>
       {"Here is your cusotoms media data:" +
-        // + `${customMedia["--photo-breakpoint"]}`
+        `${customMedia["--photo-breakpoint"]}` +
         "Here is your styles data:" +
         `${styles["photo-div"]}` +
         "Here is borderRadius" +

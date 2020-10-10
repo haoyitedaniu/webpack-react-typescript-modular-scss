@@ -46,6 +46,10 @@
   },
   "dependencies": {
     "cloudinary-core": "^2.11.3",
+    "css-customs-loader": "^0.4.0",
+    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   }
