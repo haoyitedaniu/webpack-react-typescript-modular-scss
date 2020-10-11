@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 const analyzeBundle = process.env.ANALYZE === "true";
@@ -17,7 +18,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: isProd ? "[name].[contenthash].js" : "[name].[hash].js"
+    // filename: isProd ? "[name].[contenthash].js" : "[name].[hash].js"
+    filename: "bundle.js"
   },
   devtool: isProd ? "source-map" : "eval-source-map",
   resolve: {
@@ -112,7 +114,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "docs"),
     port: 9000,
     hot: true,
     historyApiFallback: true,
@@ -126,7 +128,7 @@ module.exports = {
   },
   plugins: [
     new webpack.WatchIgnorePlugin([/s[ac]ss\.d\.ts$/]),
-    new HtmlWebpackPlugin({ template: "index.html" }),
+    new HtmlWebpackPlugin({ template: "docs/index.html" }),
     new ForkTsCheckerWebpackPlugin({
       // For the dev server overlay to work
       async: false
@@ -136,6 +138,17 @@ module.exports = {
     analyzeBundle ? new BundleAnalyzerPlugin() : false,
     new MiniCssExtractPlugin({
       filename: isProd ? "[name]-[contenthash].css" : "[name].css"
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "docs",
+          // to: dist, //by defualt is to copy docs/* to dist/*
+          globOptions: {
+            ignore: ["**/index.html"] //ignore the index.html file in docs
+          }
+        }
+      ]
     })
   ].filter(Boolean)
 };

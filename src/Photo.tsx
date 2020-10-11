@@ -42,7 +42,7 @@ const Photo = ({ publicId, alt, rounded, borderRadius }: PhotoProps) => (
         `${customMedia["--photo-breakpoint"]}` +
         "Here is your styles data:" +
         `${styles["photo-div"]}` +
-        "Here is borderRadius" +
+        "Here is borderRadius " +
         `${borderRadius}`}
     </figure>
   </div>
