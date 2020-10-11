@@ -18,8 +18,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    // filename: isProd ? "[name].[contenthash].js" : "[name].[hash].js"
-    filename: "bundle.js"
+    filename: isProd ? "[name].[contenthash].js" : "[name].[hash].js"
+    // filename: "bundle.js"
   },
   devtool: isProd ? "source-map" : "eval-source-map",
   resolve: {
